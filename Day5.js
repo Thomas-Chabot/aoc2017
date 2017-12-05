@@ -5,10 +5,7 @@ delete arr [arr.length - 1];
 function getJumpFrom (arr, index){
 	arr [index] = parseInt(arr[index]);
 	var jump = arr [index];
-	if (jump >= 3)
-		arr [index] --;
-	else
-		arr [index] ++;
+	arr [index] += (jump >= 3) ? -1 : 1;
 	return jump;
 }
 
