@@ -11,7 +11,7 @@ class ArrayDeque {
   }
 
   get(index) {
-    if (index >= this.size) return false;
+    if (index >= this.size) return null;
 
     var [arr, index] = this._parse (index);
     return arr [index];
@@ -44,16 +44,17 @@ class ArrayDeque {
   }
 
   remove (index) {
-    if (index >= this.size) return false;
+    if (index >= this.size) return null;
 
     var [arr, actualIndex] = this._parse (index);
-    this._log (`Removing ${actualIndex} from ${arr === this._front ? "front" : "back"} with length of ${arr.length}`);
+    var element = arr [actualIndex];
 
     arr.splice (actualIndex, 1);
 
     this._n --;
-
     this._balance();
+
+    return element;
   }
 
   get size(){ return this._n; }
