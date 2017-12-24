@@ -1,4 +1,5 @@
-var BufferList = require("./BufferList.js").BufferList;
+var fs         = require("fs");
+var BufferList = require("./LinkedLists/BufferList.js").BufferList;
 
 class Spinlock {
   constructor(numberSteps, opts){
@@ -26,6 +27,8 @@ class Spinlock {
     }
   }
 
+  toString(){ return this._array.toString(); }
+
   _add (value){
     this._index = this._array.getIndex (this._index + this._steps);
     this._array.addAfter (this._index, value);
@@ -38,8 +41,5 @@ class Spinlock {
 }
 
 var spinlock = new Spinlock(348);
-//spinlock.run(2017);
-//console.log (spinlock.last);
-
-spinlock.run (5000000);
-console.log (spinlock.after(0));
+spinlock.run(2017);
+console.log (spinlock.last);
