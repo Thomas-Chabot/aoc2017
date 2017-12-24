@@ -1,5 +1,7 @@
 var fs         = require("fs");
-var BufferList = require("./LinkedLists/BufferList.js").BufferList;
+
+var structures = "../../structures";
+var BufferList = require(structures + "/LinkedLists/BufferList.js").BufferList;
 
 class Spinlock {
   constructor(numberSteps, opts){
