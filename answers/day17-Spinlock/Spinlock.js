@@ -1,10 +1,12 @@
-var CircularArray = require("./CircularArray.js").CircularArray;
+var BufferList = require("./BufferList.js").BufferList;
 
 class Spinlock {
   constructor(numberSteps, opts){
     if (!opts) opts = { };
 
-    this._array = new CircularArray([0]);
+    this._array = new BufferList();
+    this._array.add (0, 0);
+
     this._index = 0;
 
     this._steps    = numberSteps;
@@ -39,5 +41,5 @@ var spinlock = new Spinlock(348);
 //spinlock.run(2017);
 //console.log (spinlock.last);
 
-spinlock.run (50000000);
+spinlock.run (5000000);
 console.log (spinlock.after(0));
