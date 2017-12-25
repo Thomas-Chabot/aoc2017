@@ -19,6 +19,22 @@ class Rotations {
 
     return result;
   }
+
+  static OneEighty (rule) {
+    var result = [ ];
+    Arrays.each (rule, (row, index)=>{
+      var r = [ ];
+      Arrays.each (row, (e, i)=>{
+        r [row.length - i - 1] = e;
+      });
+      result [rule.length - index - 1] = r;
+    });
+    return result;
+  }
+
+  static TwoSeventy (rule) {
+    return this.OneEighty (this.Ninety (rule));
+  }
 }
 
 module.exports.Rotations = Rotations;

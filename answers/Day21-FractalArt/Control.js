@@ -16,10 +16,13 @@ class Control {
 
   run () {
     var squares = new Squares (this._pattern);
+
     squares.match (this._rules);
 
     this._pattern = squares.build ();
   }
+
+  toString(){ return Arrays.join2D(this._pattern, "\n", ""); }
 }
 
 module.exports.Control = Control;

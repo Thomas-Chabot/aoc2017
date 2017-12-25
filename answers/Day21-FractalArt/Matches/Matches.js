@@ -14,6 +14,10 @@ class Matches {
 
   match (pattern) {
     pattern = Arrays.join2D(pattern, "/", "");
+    if (!this._matches [pattern]){
+      console.log ("No match found for ", pattern);
+    //  console.log (this._matches);
+    }
     return this._matches [pattern];
   }
 
@@ -46,14 +50,13 @@ class Matches {
     // 270 is a horizontally-flipped 90 degree
     // 360 is the rule itself
 
-    var rotated = Rotations.Ninety (rule);
-    result.push (rotated);
-    this._log (`Rotated: ${rotated}`);
+    var rotated1 = Rotations.Ninety (rule);
+    var rotated2 = Rotations.OneEighty (rule);
+    var rotated3 = Rotations.TwoSeventy (rule);
 
-    result.push (Flips.horizontalFlip (rotated));
-    this._log (`270 Degree: ${Flips.horizontalFlip (rotated)}`);
-
-    result.push (rule);
+    result.push (rotated1);
+    result.push (rotated2);
+    result.push (rotated3);
 
 
     return result;
@@ -62,13 +65,18 @@ class Matches {
   _getFlips (rule) {
     var result = [ ];
 
-    result.push (Flips.horizontalFlip (rule));
-    result.push (Flips.verticalFlip (rule));
-    result.push (Flips.fullFlip (rule));
+    var horizontalFlip = Flips.horizontalFlip (rule);
+    var verticalFlip   = Flips.verticalFlip (rule);
+    var fullFlip       = Flips.fullFlip (rule);
 
-    this._log (`Horizontal Flip: ${result[0]}}`);
-    this._log (`Vertical Flip: ${result[1]}`);
-    this._log (`Full Flip: ${result[2]}`);
+    result.push (horizontalFlip);
+    result.push (verticalFlip);
+    result.push (fullFlip);
+
+    result = result.concat (this._getRotations (horizontalFlip));
+    result = result.concat (this._getRotations (verticalFlip));
+    result = result.concat (this._getRotations (fullFlip));
+
 
     return result;
   }

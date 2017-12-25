@@ -35,6 +35,11 @@ class Squares {
     })
   }
 
+  toString () {
+    var grid = this.build();
+    return grid;
+  }
+
   // split the grid into squares
   _init () {
     if ((this._arr.length % 2) === 0)
@@ -47,7 +52,7 @@ class Squares {
 
   _generateSquares () {
     for (var row = 0; row < this._arr.length; row += this._rowSize) {
-      for (var col = 0; col < this._arr [row].length; col += this.colSize) {
+      for (var col = 0; col < this._arr [row].length; col += this._colSize) {
         this._generateSquare (row, col);
       }
     }
