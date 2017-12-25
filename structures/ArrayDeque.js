@@ -77,6 +77,11 @@ class ArrayDeque {
     return front + back;
   }
 
+  join (separator) {
+    return this._front.slice(0).reverse().join (separator) +
+             separator + this._back.slice(0).join (separator);
+  }
+
   _balance() {
     if (this._front.length * 3 < this._back.length) {
       this._log (`BEFORE BALANCING [ FRONT ]: ${this.toString()}`);
