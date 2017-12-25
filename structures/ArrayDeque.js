@@ -24,9 +24,8 @@ class ArrayDeque {
     arr [index] = value;
   }
 
-  add (index, value) {
-    if (!value)
-      [index, value] = [this.size, index];
+  add (value, index) {
+    if (index === undefined) index = this.size;
 
     if (index > this.size) return false;
 
@@ -40,7 +39,7 @@ class ArrayDeque {
 
     this._n ++;
 
-    this._balance();
+    //this._balance();
   }
 
   remove (index) {
@@ -58,6 +57,18 @@ class ArrayDeque {
   }
 
   get size(){ return this._n; }
+
+  indexOf (element) {
+    var index = this._front.indexOf (element);
+    if (index !== -1)
+      return this._front.length - index - 1;
+
+    index = this._back.indexOf (element);
+    if (index !== -1)
+      return index + this._front.length;
+
+    return -1;
+  }
 
   toString(){
     var front = [...this._front].reverse().join (", ") + " | ";
@@ -89,8 +100,8 @@ class ArrayDeque {
 
       var middle   = this.size / 2;
 
-      newFront = this._front.slice (0, middle);
-      newBack  = this._front.slice (middle).reverse().concat (this._back);
+      newFront = this._front.slice (middle);
+      newBack  = this._front.slice (0, middle).reverse().concat (this._back);
 
       this._front = newFront;
       this._back  = newBack;
